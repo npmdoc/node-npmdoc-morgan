@@ -1,0 +1,690 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/expressjs/morgan#readme">morgan (v1.8.1)</a>
+</h1>
+<h4>HTTP request logger middleware for node.js</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.morgan">module morgan</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.compile">
+            function <span class="apidocSignatureSpan">morgan.</span>compile
+            <span class="apidocSignatureSpan">(format)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.date">
+            function <span class="apidocSignatureSpan">morgan.</span>date
+            <span class="apidocSignatureSpan">(req, res, format)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.dev">
+            function <span class="apidocSignatureSpan">morgan.</span>dev
+            <span class="apidocSignatureSpan">(tokens, req, res)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.format">
+            function <span class="apidocSignatureSpan">morgan.</span>format
+            <span class="apidocSignatureSpan">(name, fmt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.http-version">
+            function <span class="apidocSignatureSpan">morgan.</span>http-version
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.method">
+            function <span class="apidocSignatureSpan">morgan.</span>method
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.referrer">
+            function <span class="apidocSignatureSpan">morgan.</span>referrer
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.remote-addr">
+            function <span class="apidocSignatureSpan">morgan.</span>remote-addr
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.remote-user">
+            function <span class="apidocSignatureSpan">morgan.</span>remote-user
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.req">
+            function <span class="apidocSignatureSpan">morgan.</span>req
+            <span class="apidocSignatureSpan">(req, res, field)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.res">
+            function <span class="apidocSignatureSpan">morgan.</span>res
+            <span class="apidocSignatureSpan">(req, res, field)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.response-time">
+            function <span class="apidocSignatureSpan">morgan.</span>response-time
+            <span class="apidocSignatureSpan">(req, res, digits)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.status">
+            function <span class="apidocSignatureSpan">morgan.</span>status
+            <span class="apidocSignatureSpan">(req, res)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.token">
+            function <span class="apidocSignatureSpan">morgan.</span>token
+            <span class="apidocSignatureSpan">(name, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.url">
+            function <span class="apidocSignatureSpan">morgan.</span>url
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.user-agent">
+            function <span class="apidocSignatureSpan">morgan.</span>user-agent
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">morgan.</span>combined</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">morgan.</span>common</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">morgan.</span>default</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">morgan.</span>short</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">morgan.</span>tiny</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.morgan" id="apidoc.module.morgan">module morgan</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.compile" id="apidoc.element.morgan.compile">
+        function <span class="apidocSignatureSpan">morgan.</span>compile
+        <span class="apidocSignatureSpan">(format)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function compile(format) {
+  if (typeof format !== 'string') {
+    throw new TypeError('argument format must be a string')
+  }
+
+  var fmt = format.replace(/"/g, '\\"')
+  var js = '  "use strict"\n  return "' + fmt.replace(/:([-\w]{2,})(?:\[([^\]]+)\])?/g, function (_, name, arg) {
+    var tokenArguments = 'req, res'
+    var tokenFunction = 'tokens[' + String(JSON.stringify(name)) + ']'
+
+    if (arg !== undefined) {
+      tokenArguments += ', ' + String(JSON.stringify(arg))
+    }
+
+    return '" +\n    (' + tokenFunction + '(' + tokenArguments + ') || "-") + "'
+  }) + '"'
+
+  // eslint-disable-next-line no-new-func
+  return new Function('tokens, req, res', js)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+The URL of the request. This will use `req.originalUrl` if exists, otherwise `req.url`.
+
+##### :user-agent
+
+The contents of the User-Agent header of the request.
+
+### morgan.<span class="apidocCodeKeywordSpan">compile</span>(format)
+
+Compile a format string into a `format` function for use by `morgan`. A format string
+is a string that represents a single log line and can utilize token syntax.
+Tokens are references by `:token-name`. If tokens accept arguments, they can
+be passed using `[]`, for example: `:token-name[pretty]` would pass the string
+`'pretty'` as an argument to the token `token-name`.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.date" id="apidoc.element.morgan.date">
+        function <span class="apidocSignatureSpan">morgan.</span>date
+        <span class="apidocSignatureSpan">(req, res, format)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getDateToken(req, res, format) {
+  var date = new Date()
+
+  switch (format || 'web') {
+    case 'clf':
+      return clfdate(date)
+    case 'iso':
+      return date.toISOString()
+    case 'web':
+      return date.toUTCString()
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.dev" id="apidoc.element.morgan.dev">
+        function <span class="apidocSignatureSpan">morgan.</span>dev
+        <span class="apidocSignatureSpan">(tokens, req, res)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function developmentFormatLine(tokens, req, res) {
+  // get the status code if response written
+  var status = res._header
+    ? res.statusCode
+    : undefined
+
+  // get status color
+  var color = status &gt;= 500 ? 31 // red
+    : status &gt;= 400 ? 33 // yellow
+    : status &gt;= 300 ? 36 // cyan
+    : status &gt;= 200 ? 32 // green
+    : 0 // no color
+
+  // get colored function
+  var fn = developmentFormatLine[color]
+
+  if (!fn) {
+    // compile
+    fn = developmentFormatLine[color] = compile('\x1b[0m:method :url \x1b[' +
+      color + 'm:status \x1b[0m:response-time ms - :res[content-length]\x1b[0m')
+  }
+
+  return fn(tokens, req, res)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.format" id="apidoc.element.morgan.format">
+        function <span class="apidocSignatureSpan">morgan.</span>format
+        <span class="apidocSignatureSpan">(name, fmt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function format(name, fmt) {
+  morgan[name] = fmt
+  return this
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+`'pretty'` as an argument to the token `token-name`.
+
+The function returned from `morgan.compile` takes three arguments `tokens`, `req`, and
+`res`, where `tokens` is object with all defined tokens, `req` is the HTTP request and
+`res` is the HTTP response. The function will return a string that will be the log line,
+or `undefined` / `null` to skip logging.
+
+Normally formats are defined using `morgan.<span class="apidocCodeKeywordSpan">format</span>(name, format)`, but for certain
+advanced uses, this compile function is directly available.
+
+## Examples
+
+### express/connect
+
+Simple app that will log all request in the Apache combined format to STDOUT
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.http-version" id="apidoc.element.morgan.http-version">
+        function <span class="apidocSignatureSpan">morgan.</span>http-version
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getHttpVersionToken(req) {
+  return req.httpVersionMajor + '.' + req.httpVersionMinor
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.method" id="apidoc.element.morgan.method">
+        function <span class="apidocSignatureSpan">morgan.</span>method
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getMethodToken(req) {
+  return req.method
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+#### Using a custom format function
+
+&lt;!-- eslint-disable no-undef --&gt;
+
+``` js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.<span class="apidocCodeKeywordSpan">method</span>(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+})
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.referrer" id="apidoc.element.morgan.referrer">
+        function <span class="apidocSignatureSpan">morgan.</span>referrer
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getReferrerToken(req) {
+  return req.headers['referer'] || req.headers['referrer']
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.remote-addr" id="apidoc.element.morgan.remote-addr">
+        function <span class="apidocSignatureSpan">morgan.</span>remote-addr
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getip(req) {
+  return req.ip ||
+    req._remoteAddress ||
+    (req.connection &amp;&amp; req.connection.remoteAddress) ||
+    undefined
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.remote-user" id="apidoc.element.morgan.remote-user">
+        function <span class="apidocSignatureSpan">morgan.</span>remote-user
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getRemoteUserToken(req) {
+  // parse basic credentials
+  var credentials = auth(req)
+
+  // return username
+  return credentials
+    ? credentials.name
+    : undefined
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.req" id="apidoc.element.morgan.req">
+        function <span class="apidocSignatureSpan">morgan.</span>req
+        <span class="apidocSignatureSpan">(req, res, field)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getRequestToken(req, res, field) {
+  // get header
+  var header = req.headers[field.toLowerCase()]
+
+  return Array.isArray(header)
+    ? header.join(', ')
+    : header
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.res" id="apidoc.element.morgan.res">
+        function <span class="apidocSignatureSpan">morgan.</span>res
+        <span class="apidocSignatureSpan">(req, res, field)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getResponseHeader(req, res, field) {
+  if (!res._header) {
+    return undefined
+  }
+
+  // get header
+  var header = res.getHeader(field)
+
+  return Array.isArray(header)
+    ? header.join(', ')
+    : header
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+``` js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.<span class="apidocCodeKeywordSpan">res</span>(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+})
+```
+
+#### Options
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.response-time" id="apidoc.element.morgan.response-time">
+        function <span class="apidocSignatureSpan">morgan.</span>response-time
+        <span class="apidocSignatureSpan">(req, res, digits)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getResponseTimeToken(req, res, digits) {
+  if (!req._startAt || !res._startAt) {
+    // missing request and/or response start time
+    return
+  }
+
+  // calculate diff
+  var ms = (res._startAt[0] - req._startAt[0]) * 1e3 +
+    (res._startAt[1] - req._startAt[1]) * 1e-6
+
+  // return truncated value
+  return ms.toFixed(digits === undefined ? 3 : digits)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.status" id="apidoc.element.morgan.status">
+        function <span class="apidocSignatureSpan">morgan.</span>status
+        <span class="apidocSignatureSpan">(req, res)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getStatusToken(req, res) {
+  return res._header
+    ? String(res.statusCode)
+    : undefined
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;!-- eslint-disable no-undef --&gt;
+
+``` js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.<span class="apidocCodeKeywordSpan">status</span>(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+})
+```
+
+#### Options
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.token" id="apidoc.element.morgan.token">
+        function <span class="apidocSignatureSpan">morgan.</span>token
+        <span class="apidocSignatureSpan">(name, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function token(name, fn) {
+  morgan[name] = fn
+  return this
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+:method :url :status :res[content-length] - :response-time ms
+```
+
+#### Tokens
+
+##### Creating new tokens
+
+To define a token, simply invoke `morgan.<span class="apidocCodeKeywordSpan">token</span>()` with the name and a callback function
+.
+This callback function is expected to return a string value. The value returned is then
+available as ":type" in this case:
+
+&lt;!-- eslint-disable no-undef --&gt;
+
+```js
+morgan.token('type', function (req, res) { return req.headers['content-type'] })
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.url" id="apidoc.element.morgan.url">
+        function <span class="apidocSignatureSpan">morgan.</span>url
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getUrlToken(req) {
+  return req.originalUrl || req.url
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+&lt;!-- eslint-disable no-undef --&gt;
+
+``` js
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.<span class="apidocCodeKeywordSpan">url</span>(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+})
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.user-agent" id="apidoc.element.morgan.user-agent">
+        function <span class="apidocSignatureSpan">morgan.</span>user-agent
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getUserAgentToken(req) {
+  return req.headers['user-agent']
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
