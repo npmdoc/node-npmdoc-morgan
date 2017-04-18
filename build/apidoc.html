@@ -63,6 +63,15 @@
 
         <li>
 
+            <a class="apidocElementLiA" href="#apidoc.element.morgan.morgan">
+            function <span class="apidocSignatureSpan"></span>morgan
+            <span class="apidocSignatureSpan">(format, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
             <a class="apidocElementLiA" href="#apidoc.element.morgan.compile">
             function <span class="apidocSignatureSpan">morgan.</span>compile
             <span class="apidocSignatureSpan">(format)</span>
@@ -241,6 +250,106 @@
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.morgan" id="apidoc.module.morgan">module morgan</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.morgan.morgan" id="apidoc.element.morgan.morgan">
+        function <span class="apidocSignatureSpan"></span>morgan
+        <span class="apidocSignatureSpan">(format, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function morgan(format, options) {
+  var fmt = format
+  var opts = options || {}
+
+  if (format &#x26;&#x26; typeof format === &#x27;object&#x27;) {
+    opts = format
+    fmt = opts.format || &#x27;default&#x27;
+
+    // smart deprecation message
+    deprecate(&#x27;morgan(options): use morgan(&#x27; + (typeof fmt === &#x27;string&#x27; ? JSON.stringify(fmt) : &#x27;format&#x27;) + &#x27;, options) instead&#x27;)
+  }
+
+  if (fmt === undefined) {
+    deprecate(&#x27;undefined format: specify a format&#x27;)
+  }
+
+  // output on request instead of response
+  var immediate = opts.immediate
+
+  // check if log entry should be skipped
+  var skip = opts.skip || false
+
+  // format function
+  var formatLine = typeof fmt !== &#x27;function&#x27;
+    ? getFormatFunction(fmt)
+    : fmt
+
+  // stream
+  var buffer = opts.buffer
+  var stream = opts.stream || process.stdout
+
+  // buffering support
+  if (buffer) {
+    deprecate(&#x27;buffer option&#x27;)
+
+    // flush interval
+    var interval = typeof buffer !== &#x27;number&#x27;
+      ? DEFAULT_BUFFER_DURATION
+      : buffer
+
+    // swap the stream
+    stream = createBufferStream(stream, interval)
+  }
+
+  return function logger (req, res, next) {
+    // request data
+    req._startAt = undefined
+    req._startTime = undefined
+    req._remoteAddress = getip(req)
+
+    // response data
+    res._startAt = undefined
+    res._startTime = undefined
+
+    // record request start
+    recordStartTime.call(req)
+
+    function logRequest () {
+      if (skip !== false &#x26;&#x26; skip(req, res)) {
+        debug(&#x27;skip request&#x27;)
+        return
+      }
+
+      var line = formatLine(morgan, req, res)
+
+      if (line == null) {
+        debug(&#x27;skip line&#x27;)
+        return
+      }
+
+      debug(&#x27;log request&#x27;)
+      stream.write(line + &#x27;\n&#x27;)
+    };
+
+    if (immediate) {
+      // immediate log
+      logRequest()
+    } else {
+      // record response start
+      onHeaders(res, recordStartTime)
+
+      // log when response finished
+      onFinished(res, logRequest)
+    }
+
+    next()
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 
     <h2>
